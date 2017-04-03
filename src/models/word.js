@@ -1,4 +1,5 @@
-// Create new comment in your database and return its id
+const books = require("../books"),
+      _ = require("lodash");
 
 // Get a particular comment
 exports.get = function(word, cb) {
@@ -27,14 +28,14 @@ exports.get = function(word, cb) {
   .catch(e => {
     cb(e)
   });
-}
+};
 
-// Get all comments
-exports.all = function(cb) {
-  cb(null, [])
-}
 
-// Get all comments by a particular user
-exports.allByUser = function(user, cb) {
-  cb(null, [])
-}
+exports.getBatch = function(options, cb) {
+  options = options || {};
+  options.batch = +options.batch > 0 ? +options.batch : 50;  // batch should be a valid number and fall back to 50
+  books("gre", (err, words) => {
+    words = _.sampleSize(words, options.batch);
+    cb(err, words);
+  });
+};
