@@ -25,7 +25,7 @@ let config = {
   mock: false,
 
   // Hosting
-  port: 3000,
+  port: 3001,
 
   // db
   mongo: "mongodb://localhost:27017/xiaobao"

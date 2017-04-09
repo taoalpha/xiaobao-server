@@ -12,6 +12,8 @@ module.exports = require("./app")([
   
   "libs",
 
+  "compress",
+
   "allowCrossDomain",
 
   "bodyParser",
