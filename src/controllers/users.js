@@ -5,11 +5,13 @@ const express = require('express'),
 // Define routes handling profile requests
 
 router.patch('/:username', function(req, res) {
-  User.update.call({db: req.db}, req.body)
+  User.update.call({db: req.db}, req.params.username, req.body)
     .then(() => {
       res.sendStatus(200);
     })
-    .catch(e => res.send(e));
+    .catch(e => {
+      res.sendStatus(200);
+    });
 })
 
 module.exports = router

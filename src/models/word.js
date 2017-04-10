@@ -40,7 +40,7 @@ exports.getBatch = function(options) {
     // TODO: Need to be improved...
     return userC.findOne({name: "xiaobao"}).then(userDoc => {
       // get words for this batch
-      curBatch = _.sampleSize(_.difference(words, userDoc.vocabulary, useDoc.remembered), options.batch);
+      curBatch = _.sampleSize(_.difference(words, userDoc.vocabulary, userDoc.remembered), options.batch);
       return curBatch;
     }).then(words => {
       return wordC.find({word: {$in: words}}).toArray().then(docs => {

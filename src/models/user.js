@@ -11,7 +11,7 @@ function sequencePromise(data, eachFn) {
 // Get a particular comment
 exports.update = function(name, data) {
   const userC = this.db.collection('user');
-  return userC.update({name}, { $push: { remembered: {$each: data.remembered | []} } });
+  return userC.update({name}, { $push: { remembered: {$each: data.remembered || []} } });
 };
 
 

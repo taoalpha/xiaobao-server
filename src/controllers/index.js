@@ -2,6 +2,7 @@ const express = require('express'),
       router = express.Router()
 
 router.use('/words', require('./words'))
+router.use('/users', require('./users'))
 
 router.get('/', function(req, res) {
   res.render('index')
