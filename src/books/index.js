@@ -9,17 +9,16 @@ fs.readdirSync(__dirname + "/").forEach(function (file) {
 })
 
 
-module.exports = function (name, cb) {
-  try {
-    let words = null;
-    if (name) {
-      words = fs.readFileSync(__dirname + "/" + bookStore[name], "utf-8").split("\n");
-    } else {
-      let keys = Object.keys(bookStore);
-      words = fs.readFileSync(__dirname + "/" + bookStore[keys[Math.floor(Math.random() * keys.length)]], "utf-8");
-    }
-    cb(null, words);
-  } catch (e) {
-    cb(e);
-  }
+module.exports = function (name) {
+  return Promise.resolve(name)
+    .then(name => {
+      let words = null;
+      if (name) {
+        words = fs.readFileSync(__dirname + "/" + bookStore[name], "utf-8").split("\n");
+      } else {
+        let keys = Object.keys(bookStore);
+        words = fs.readFileSync(__dirname + "/" + bookStore[keys[Math.floor(Math.random() * keys.length)]], "utf-8");
+      }
+      return words;
+    });
 }
