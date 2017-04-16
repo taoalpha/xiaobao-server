@@ -47,5 +47,8 @@ exports.getBatch = async function(options) {
   }
 
   userC.update({name: "xiaobao"}, { $push: { vocabulary: { $each: fetchWords } } });
+
+  // remove words without deinitions
+  wordDocs = wordDocs.filter(word => word.definitions.length);
   return wordDocs;
 };
