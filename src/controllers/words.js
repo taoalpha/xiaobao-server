@@ -8,7 +8,9 @@ router.get('/', function(req, res) {
     .then(words => {
       res.json(words);
     })
-    .catch(e => res.send(e));
+    .catch(e => {
+      res.send(e);
+    });
 })
 
 router.get('/:word', function(req, res) {

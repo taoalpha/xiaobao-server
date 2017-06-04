@@ -34,7 +34,7 @@ exports.getBatch = async function(options) {
   const totalWords = await books(userDoc.book);
   const fetchWords = _.sampleSize(_.difference(totalWords, _.difference(userDoc.vocabulary, userDoc.remembered)), options.batch)
 
-  const wordDocs = await wordC.find({word: {$in: fetchWords}}).toArray();
+  let wordDocs = await wordC.find({word: {$in: fetchWords}}).toArray();
   for (let doc of wordDocs) {
     doc.sentences = [];
     for (let vid of doc.examples) {
@@ -49,6 +49,6 @@ exports.getBatch = async function(options) {
   userC.update({name: "xiaobao"}, { $push: { vocabulary: { $each: fetchWords } } });
 
   // remove words without deinitions
-  wordDocs = wordDocs.filter(word => word.definitions.length);
+  wordDocs = wordDocs.filter(word => Object.keys(word.definitions).length);
   return wordDocs;
 };

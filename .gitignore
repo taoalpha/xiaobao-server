@@ -1,5 +1,6 @@
 # custom
 db/
+.vscode/
 
 # Logs
 logs
